@@ -8,7 +8,7 @@ const searchUrl = `${GITHUB_URL}/search/repositories`;
 const api = axios.create();
 
 const trendsService = {
-  getReoositiories: () => {
+  getRepositiories: () => {
     const lastSevenDays = dayjs().subtract(7, 'days').format('YYYY-MM-DD');
     
     const params = new URLSearchParams({

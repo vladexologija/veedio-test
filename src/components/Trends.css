@@ -24,14 +24,28 @@
 
 .trends .trend-item .trend-stats {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
 }
 
-.trends .trend-item .trend-counter {
+.trends .trend-item .trend-item__counter {
   padding: 5px 10px;
   font-weight: 700;
   border-radius: 4px;
   background-color: cadetblue;
   color: white;
+  margin-left: 10px;
+}
+
+.trends .trend-item .trend-item__star {
+  cursor: pointer;
+  fill: lightpink;
+}
+
+.trends .trend-item .trend-item__star:hover {
+  fill: deeppink;
+}
+
+.trends .trend-item .trend-item__star.trend-item__star--favorite {
+  fill: deeppink;
 }
