@@ -1,16 +1,37 @@
 .trends {
   text-align: left;
-  list-style: none;
+  list-style-type: none;
   padding-inline: 0px;
+  border-radius: 8px;
+  margin-block: 0px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
 }
 
 .trends .trend-item {
   padding: 10px;
-  background-color: lightblue;
-  margin-bottom: 10px;
+  display: flex;
+  border-bottom: 1px solid black;
+  flex-grow: 1;
 }
 
-.trends .trend-item-label {
-  font-weight: 800;
-  margin-right: 10px;
+.trends .trend-item .trend-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.trends .trend-item .trend-stats {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.trends .trend-item .trend-counter {
+  padding: 5px 10px;
+  font-weight: 700;
+  border-radius: 4px;
+  background-color: cadetblue;
+  color: white;
 }

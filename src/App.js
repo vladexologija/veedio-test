@@ -9,7 +9,7 @@ function App() {
          GitHub Trends
         </p>
       </header>
-      <section>
+      <section className='app-container'>
         <Trends/>
       </section>
     </div>

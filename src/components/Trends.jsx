@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./Trends.css";
 import API from "../services/API";
+import "./Trends.css";
 
 const Trends = () => {
   const [repos, setRepos] = useState([]);
@@ -18,25 +18,20 @@ const Trends = () => {
     <ul className="trends">
       {repos.map((repo) => (
         <li key={repo.id} className="trend-item">
-          <p>
-            <span className="trend-item-label">Name:</span> 
-            {repo.name}
-          </p>
-          <p>
-            <span className="trend-item-label">Link:</span>
+          <div className="trend-info">
+            <h3>
+              {repo.name} 
+            </h3>
             <a href={repo.url}>{repo.url}</a>
-          </p>
-          <p>
-            <span className="trend-item-label">Description:</span>
-            {repo.description}
-          </p>
-          <p>
-            <span className="trend-item-label">Stars:</span>
-            {repo.stargazers_count}
-          </p>
+            <p>{repo.description}</p>
+          </div>
+          <div className="trend-stats">
+            <div className="trend-counter">{repo.stargazers_count}</div>
+          </div>          
         </li>
       ))}
     </ul>
   );
 };
+
 export default Trends;
