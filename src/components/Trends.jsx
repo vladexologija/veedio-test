@@ -4,29 +4,46 @@ import Trend from "./Trend";
 import "./Trends.css";
 
 const Trends = () => {
-  const { repos, favoritesToggle, setActiveToggle, addToFavorites } = useTrends();
+  const {
+    repos,
+    favoritesToggle,
+    setFavoritesActiveToggle,
+    languagesToggle,
+    setLanguagesActiveToggle,
+    addToFavorites,
+  } = useTrends();
 
   return (
     <>
-      <select
-        onChange={(e) => setActiveToggle(e.target.value)}
-      >
-        {favoritesToggle.map((toggle) => (
-          <option key={toggle.key} value={toggle.key}>{toggle.label}</option>
-        ))}
-      </select>      
-      <ul className="trends">
-        {repos.map((repo) => {
-          console.log('repo', repo.favorite)
-          return (
-            <Trend
-              key={repo.id}
-              repo={repo}
-              addToFavorites={() => addToFavorites(repo.id)}
-            />
-          );
-        })}
-      </ul>
+      <nav className="app-navbar">
+        <select onChange={(e) => setFavoritesActiveToggle(e.target.value)}>
+          {favoritesToggle.map((toggle) => (
+            <option key={toggle.key} value={toggle.key}>
+              {toggle.label}
+            </option>
+          ))}
+        </select>
+        <select onChange={(e) => setLanguagesActiveToggle(e.target.value)}>
+          {languagesToggle.map((toggle) => (
+            <option key={toggle} value={toggle}>
+              {toggle}
+            </option>
+          ))}
+        </select>
+      </nav>
+      <section className="app-container">
+        <ul className="trends">
+          {repos.map((repo) => {
+            return (
+              <Trend
+                key={repo.id}
+                repo={repo}
+                addToFavorites={() => addToFavorites(repo.id)}
+              />
+            );
+          })}
+        </ul>
+      </section>
     </>
   );
 };

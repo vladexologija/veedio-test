@@ -11,6 +11,7 @@ const Trend = ({repo, addToFavorites}) => (
       <p>{repo.description}</p>
     </div>
     <div className="trend-stats">
+      <h5>{repo.language}</h5>
       <div
         className={cx("trend-item__star", {
           "trend-item__star--favorite": repo.favorite,

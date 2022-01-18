@@ -7,7 +7,9 @@ const useTrends = () => {
     { key: "all", label: "Show All" },
     { key: "favorites", label: "Only Favorites" },
   ];
-  const [activeToggle, setActiveToggle] = useState(favoritesToggle[0].key);
+  const [languagesToggle, setLanguagesToggle] = useState([]);
+  const [favoritesActiveToggle, setFavoritesActiveToggle] = useState(favoritesToggle[0].key);
+  const [languagesActiveToggle, setLanguagesActiveToggle] = useState();
   const [repos, setRepos] = useState([]);
 
   useEffect(() => {
@@ -15,12 +17,16 @@ const useTrends = () => {
       const result = await API.getRepositiories();
       const storage = window.localStorage.getItem(STORAGE);
       const storageFavorites = storage ? JSON.parse(storage) : {};
-
+      
+      const languages = { 'All': true };
       setRepos(
         result.data.items.map((item) => {
+          if (item.language) languages[item.language] = true          
           return { ...item, favorite: !!storageFavorites[item.id] };
         })
       );
+
+      setLanguagesToggle(Object.keys(languages))
     }
 
     fetchData();
@@ -45,11 +51,20 @@ const useTrends = () => {
   }, []);
 
   const availableRepos = useMemo(() => {
-    if (activeToggle === 'all') return repos;
-    return repos.filter(repo => repo.favorite);
-  }, [repos, activeToggle])
+    let filteredRepos = [...repos];
+    
+    if (favoritesActiveToggle === 'favorites') {
+      filteredRepos = filteredRepos.filter(repo => repo.favorite);
+    } 
+    
+    if (languagesActiveToggle && languagesActiveToggle !== 'All') {
+      filteredRepos = filteredRepos.filter(repo => repo.language === languagesActiveToggle);
+    } 
 
-  return { repos: availableRepos, favoritesToggle, setActiveToggle, addToFavorites };
+    return filteredRepos
+  }, [repos, languagesActiveToggle, favoritesActiveToggle])
+
+  return { repos: availableRepos, favoritesToggle, languagesToggle, favoritesActiveToggle, setFavoritesActiveToggle, setLanguagesActiveToggle, addToFavorites };
 };
 
 export default useTrends;
